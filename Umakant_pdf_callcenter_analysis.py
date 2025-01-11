@@ -8,7 +8,7 @@ import os
 from mistralai import Mistral
 
 # Set Mistral API Key
-os.environ['MISTRAL_API_KEY'] = "uPs3dzZadnmMZAoO8mRug8K4MI4kLjMy"
+os.environ['MISTRAL_API_KEY'] = st.secrets["api_key_mistral"]
 
 # Function to extract text from PDF
 def extract_text_from_pdf(pdf_path):
