@@ -140,8 +140,10 @@ Provide the ratings along with a brief explanation for each based on your analys
 
 Please analyze the customer care call transcript and evaluate the Customer Service Representative's (CS) performance based on the questions listed above. Provide a rating for each question on a scale of 1 to 5, where 1 is the lowest and 5 is the highest. Include a brief explanation for each rating based on your analysis of the transcript.Final output should be in Proper json format.
 
-AT THE END I NEED THE COMPLETE DETAILED  SUMMARY OF WHATEVER HAPPENED IN THE CONVERSATION IN 100 WORDS.(it must be of 100 words AND includes all the important points of conversation.)
+I NEED THE COMPLETE DETAILED  SUMMARY OF WHATEVER HAPPENED IN THE CONVERSATION IN 100 WORDS in Paragraph Format.(it must be of 100 words AND includes all the important points of conversation.)
 AFTER THAT I NEED A OVERALL SENTIMENT OF CUSTOMER ALSO .
+ALSO PREDICT SOME IMPORTANT WORDS (AROUND 20-30) FOR WORDCLOUD FORMATION [THE WORDS SHOULD BE MOST IMPORTANT FROM THE CONTEXT]
+
 INCLUDE EVERYTHING IN JSON SCHEMA AS DESCRIBED BELOW.
 
 RESPONSE FORMAT:
@@ -152,6 +154,7 @@ I NEED A JSON FILE WITH THE FOLLOWING STRUCTURE
 
  Summary of Conversation:
  overall Sentiment of customer:
+ Important words:
  }
  The structure should follow for all 17 questions.
 
