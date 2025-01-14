@@ -40,7 +40,7 @@ def generate_wordcloud_from_pdf(pdf_path, stopwords=None, background_color="whit
 # Function to process and display rating and analysis
 def view_rating_and_analysis(pdf_path, prompt_transcript_to_rating):
     api_key = os.environ["MISTRAL_API_KEY"]
-    model = "mistral-small-latest"
+    model = "ministral-8b-latest"
     client = Mistral(api_key=api_key)
     pdf_text = extract_text_from_pdf(pdf_path)
     messages = [
@@ -69,7 +69,8 @@ if uploaded_file is not None:
     pdf_path = f"temp_{uploaded_file.name}"
     
     if st.button("VIEW RATING AND ANALYSIS"):
-        prompt_transcript_to_rating = '''You are an AI assistant tasked with evaluating the quality of customer service provided by a Customer Service Representative (CS) based on a conversation transcript between the CS and a customer.
+        prompt_transcript_to_rating = '''
+You are an AI assistant tasked with evaluating the quality of customer service provided by a Customer Service Representative (CS) based on a conversation transcript between the CS and a customer.
 The Conversations will  revolves around vehicle insurance claims and policy management. Customers often reach out the  support team to file accident claims and address billing concerns and also querying about insurance policy avaliability. The representative,assists with claims processing, reviews policies for potential savings, and ensures customers are not overcharged. The focus is on providing empathetic support, streamlining the claims process, and offering proactive solutions to enhance customer satisfaction and retention. Overall, the aim is to resolve issues efficiently and optimize insurance coverage and costs for the customers.The customer representatives belongs to a insurance company  which operates in the vehicle insurance industry, providing services such as policy management, billing support, and claims processing.The insurance company  works with multiple providers (e.g., Provider Allison and Provider B: Benhur), offering features like accident forgiveness and flexible deductibles to cater to diverse customer needs.
 
 Your role is to analyze the provided transcript and evaluate the CS's performance according to predefined criteria. For each criterion, you will provide a rating on a scale from 1 to 5, where:
@@ -140,9 +141,13 @@ Provide the ratings along with a brief explanation for each based on your analys
 
 Please analyze the customer care call transcript and evaluate the Customer Service Representative's (CS) performance based on the questions listed above. Provide a rating for each question on a scale of 1 to 5, where 1 is the lowest and 5 is the highest. Include a brief explanation for each rating based on your analysis of the transcript.Final output should be in Proper json format.
 
-I NEED THE COMPLETE DETAILED  SUMMARY OF WHATEVER HAPPENED IN THE CONVERSATION IN 100 WORDS in Paragraph Format.(it must be of 100 words AND includes all the important points of conversation.)
-AFTER THAT I NEED A OVERALL SENTIMENT OF CUSTOMER ALSO .
+I NEED THE COMPLETE DETAILED  SUMMARY OF WHATEVER HAPPENED IN THE CONVERSATION IN 100 WORDS in paragraph format.(it must be of 100 words AND includes all the important points of conversation.)
+
+Solutions given by agent: Added a new key in the JSON structure to capture the solutions offered by the agent during the conversation. This will be populated based on the transcript.
+
 ALSO PREDICT SOME IMPORTANT WORDS (AROUND 20-30) FOR WORDCLOUD FORMATION [THE WORDS SHOULD BE MOST IMPORTANT FROM THE CONTEXT]
+
+AFTER THAT I NEED A OVERALL SENTIMENT OF CUSTOMER ALSO .
 
 INCLUDE EVERYTHING IN JSON SCHEMA AS DESCRIBED BELOW.
 
@@ -153,8 +158,10 @@ I NEED A JSON FILE WITH THE FOLLOWING STRUCTURE
  .....
 
  Summary of Conversation:
- overall Sentiment of customer:
- Important words:
+ "Solutions given by agent": [],
+ "Important Words": [],
+ "Overall Sentiment of Customer": [],
+
  }
  The structure should follow for all 17 questions.
 
